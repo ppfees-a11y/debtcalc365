@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://debtcalc365.com/sitemap.xml
