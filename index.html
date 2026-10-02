@@ -1,4 +1,48 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Debt Consolidation Calculator | DebtCalc365</title><meta name="description" content="Free U.S. debt consolidation calculator. Compare current debts with a consolidation loan."><link rel="stylesheet" href="style.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5287196493103465"
-     crossorigin="anonymous"></script>
-</head><body><header><div class="wrap top"><b>DebtCalc365</b><nav><a href="/">Calculator</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div></header><main class="wrap"><section class="hero"><h1>Debt Consolidation Calculator</h1><p>Compare your current debts with a potential consolidation loan.</p></section><section class="card"><h2>Current Debts</h2><p>Enter up to four debts. Leave unused rows blank.</p><div class="heads"><b>Balance ($)</b><b>APR (%)</b><b>Monthly Payment ($)</b></div><div id="rows"></div><h2>Potential Consolidation Loan</h2><div class="grid"><label>Loan APR (%)<input id="newApr" type="number" value="12" min="0" step=".01"></label><label>Term (Years)<select id="years"><option>2</option><option>3</option><option selected>5</option><option>7</option></select></label><label>Origination Fee (%)<input id="fee" type="number" value="0" min="0" step=".01"></label></div><button id="calc">Compare Debt Options</button><p id="msg"></p><div class="results"><div><span>Total Debt</span><strong id="total">—</strong></div><div><span>Current Monthly Payments</span><strong id="oldPay">—</strong></div><div><span>New Estimated Payment</span><strong id="newPay">—</strong></div><div><span>Monthly Payment Difference</span><strong id="payDiff">—</strong></div><div><span>Estimated Current Interest</span><strong id="oldInt">—</strong></div><div><span>New Interest + Fee</span><strong id="newInt">—</strong></div><div class="wide"><span>Estimated Interest Savings</span><strong id="save">—</strong></div></div></section><section class="card"><h2>How Debt Consolidation Works</h2><p>Debt consolidation combines multiple debts into one new loan. A lower rate may reduce interest costs. A longer term may lower the monthly payment but can increase total cost.</p><h2>Important</h2><p>This calculator provides educational estimates only. Actual lender offers, fees, credit requirements and loan terms vary. Results are not financial, legal, tax or credit advice.</p></section></main><footer>© <span id="yr"></span> DebtCalc365 · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Debt Payoff Calculator | DebtCalc365</title>
+<meta name="description" content="Free debt payoff calculators for a single debt, multiple debts, debt snowball and debt avalanche comparisons, and extra monthly payments.">
+<link rel="stylesheet" href="style.css"></head><body>
+<header><div class="wrap top"><a class="brand" href="index.html">DebtCalc365</a><nav><a href="#single">Payoff</a><a href="#multi">Multiple Debts</a><a href="#guide">Guide</a><a href="#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><p class="eyebrow">FREE DEBT PLANNING TOOLS</p><h1>Debt Payoff Calculator</h1><p class="lead">Estimate payoff time and interest, test extra monthly payments, and compare debt snowball and debt avalanche payoff orders.</p></section>
+
+<section class="card" id="single"><h2>1. Single Debt Payoff Calculator</h2>
+<div class="grid"><label>Balance ($)<input id="bal" type="number" min="0" step="10" value="10000"></label><label>APR (%)<input id="apr" type="number" min="0" step=".01" value="12"></label><label>Monthly payment ($)<input id="pay" type="number" min="0" step="5" value="300"></label><label>Extra monthly payment ($)<input id="extra" type="number" min="0" step="5" value="0"></label></div>
+<button onclick="single()">Calculate Payoff</button><p class="error" id="e1"></p>
+<div class="results"><div><span>Estimated payoff time</span><strong id="time">—</strong></div><div><span>Estimated total interest</span><strong id="interest">—</strong></div><div><span>Estimated total paid</span><strong id="total">—</strong></div><div><span>Payment used</span><strong id="used">—</strong></div></div></section>
+
+<section class="card"><h2>2. Extra Payment Comparison</h2><p>See the estimated difference between your regular payment and a higher fixed payment.</p>
+<div class="grid"><label>Balance ($)<input id="cbal" type="number" min="0" step="10" value="10000"></label><label>APR (%)<input id="capr" type="number" min="0" step=".01" value="12"></label><label>Regular payment ($)<input id="cpay" type="number" min="0" step="5" value="300"></label><label>Extra each month ($)<input id="cextra" type="number" min="0" step="5" value="100"></label></div>
+<button onclick="compare()">Compare Payments</button><p class="error" id="e2"></p>
+<div class="results"><div><span>Regular payoff</span><strong id="rtime">—</strong></div><div><span>With extra payment</span><strong id="xtime">—</strong></div><div><span>Estimated time saved</span><strong id="tsave">—</strong></div><div><span>Estimated interest saved</span><strong id="isave">—</strong></div></div></section>
+
+<section class="card" id="multi"><h2>3. Debt Snowball vs. Avalanche Order</h2><p>Enter up to four debts. This comparison sorts the debts by the two commonly discussed payoff approaches. It does not model changing minimum payments or produce individualized advice.</p>
+<div id="debts"></div><button onclick="strategies()">Compare Payoff Orders</button><p class="error" id="e3"></p>
+<div class="strategy"><div><h3>Snowball order</h3><p class="small">Lowest balance first</p><ol id="snow"></ol></div><div><h3>Avalanche order</h3><p class="small">Highest APR first</p><ol id="ava"></ol></div></div></section>
+
+<section class="content" id="guide"><h2>Debt Payoff Guide</h2>
+<p>A debt payoff estimate depends primarily on the balance, interest rate, payment amount, fees, and whether new debt is added. These tools use simplified monthly-interest calculations so you can explore scenarios without connecting a financial account.</p>
+<h3>How Interest Affects Payoff</h3><p>Interest increases the amount that must be repaid. When a payment exceeds the modeled interest for the month, the remainder reduces principal. As principal declines, future interest generally declines under this simplified model.</p>
+<h3>Extra Payments</h3><p>Adding money to a payment can reduce principal faster and may reduce total interest. Actual results depend on the debt agreement, how the creditor applies payments, fees, and whether there are prepayment restrictions or other terms.</p>
+<h3>Debt Snowball</h3><p>The snowball approach generally prioritizes the smallest balance first while required payments continue on other debts. After one debt is repaid, money previously directed to it can be redirected to another debt.</p>
+<h3>Debt Avalanche</h3><p>The avalanche approach generally prioritizes the debt with the highest interest rate first while required payments continue on other debts. The two approaches can produce different payoff sequences.</p>
+<h3>Why This Site Does Not Pick a Strategy for You</h3><p>Personal cash flow, contractual terms, promotional rates, fees, variable rates, tax considerations, and other circumstances can matter. DebtCalc365 therefore shows calculations and definitions without declaring one method the right choice for every user.</p></section>
+
+<section class="content"><h2>Example</h2><p>For a $10,000 balance at 12% APR with a fixed $300 monthly payment and no new charges, this simplified model estimates payoff in about 41 months and approximately $2,151 in interest. Increasing the fixed payment changes both the payoff time and estimated interest.</p></section>
+
+<section class="content"><h2>What These Estimates Do Not Include</h2><p>Actual debts may use daily interest, variable rates, promotional periods, late fees, annual fees, origination charges, different payment-allocation rules, or other contract terms. The calculators also assume no new borrowing or purchases are added to the modeled balance.</p></section>
+
+<section class="content" id="faq"><h2>Frequently Asked Questions</h2>
+<h3>Does DebtCalc365 connect to my accounts?</h3><p>No. The site does not require account credentials. You enter the numbers you want to model.</p>
+<h3>What happens if my payment is too low?</h3><p>If the payment does not exceed the modeled monthly interest, the calculator warns you rather than showing a misleading payoff date.</p>
+<h3>Can I model a zero-interest debt?</h3><p>Yes. With a 0% APR, the estimate divides the balance by the payment while accounting for the final partial payment.</p>
+<h3>Are snowball and avalanche the same?</h3><p>No. Snowball generally orders debts by balance from smallest to largest; avalanche generally orders them by APR from highest to lowest.</p>
+<h3>Does the calculator include new charges?</h3><p>No. The payoff calculations assume no new borrowing is added.</p>
+<h3>Is this financial advice or debt counseling?</h3><p>No. DebtCalc365 provides general educational calculations and is not a lender, creditor, debt-settlement company, credit counselor, or financial adviser.</p></section>
+
+<section class="content"><h2>About DebtCalc365</h2><p>DebtCalc365 is a free educational utility designed to make common debt payoff calculations easier to understand. Results are estimates based entirely on the numbers entered by the user.</p></section>
+</main>
+<footer><div class="wrap"><p>Educational estimates only. Review your creditor agreements and statements for actual rates, fees, balances, and payment rules.</p><p class="creator">Created by James Gore</p><p><a href="index.html">Calculators</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Use</a></p><p>© 2026 DebtCalc365</p></div></footer>
+<script src="script.js"></script></body></html>
